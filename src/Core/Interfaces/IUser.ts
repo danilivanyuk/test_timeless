@@ -13,7 +13,7 @@ export interface IUser {
     city: string;
     state: string;
     country: string;
-    postcode: string;
+    postcode: string | number;
     coordinates: {
       latitude: string;
       longitude: string;
@@ -42,10 +42,10 @@ export interface IUser {
     age: number;
   };
   phone: string;
-  cel: string;
+  cell: string;
   id: {
     name: string;
-    value: string;
+    value: string | null;
   };
   picture: {
     large: string;

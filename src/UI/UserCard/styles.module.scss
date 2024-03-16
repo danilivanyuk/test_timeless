@@ -1,3 +1,74 @@
+@use '../../variables';
+
 .userCard {
-    
+    color: #fff;
+    height: 196px;
+    width: 332px;
+    border-radius: 16px;
+    background: variables.$mainLighter;
+}
+.userCardInner {
+    padding: variables.$defaultPadding;
+}
+.cardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: variables.$mainTextColor;
+    height: 56px;
+    width: 255px;
+    gap: 16px;
+    overflow: hidden;
+    // TODO: Сделать ...
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}
+.userImage {
+    border-radius: variables.$defaultRadius;
+    width: 56px;
+    height: 56px;
+}
+
+.userName {
+    font-weight: variables.$mainWeight;
+    font-size: variables.$largeText;
+    line-height: 24px;
+}
+
+.userEmail {
+    font-weight: variables.$mediumWeight;
+    font-size: variables.$mediumText;
+    line-height: 20px;
+}
+
+.cardBottom {
+    width: 292px;
+    overflow: hidden;
+    // TODO: Сделать ...
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    display: grid;
+    grid-template-columns: 57px 219px;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.userAdditionalInfoTitle {
+    font-weight: variables.$mediumWeight;
+    font-size: variables.$smallText;
+    line-height: 20px;
+    color: variables.$darkTextColor;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.userAdditionalInfo {
+    font-weight: variables.$mediumWeight;
+    font-size: variables.$mediumText;
+    line-height: 20px;
+    color: variables.$mainTextColor;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
