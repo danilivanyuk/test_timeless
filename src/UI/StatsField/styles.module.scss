@@ -1,3 +1,63 @@
+@use '../../variables';
+
 .statsContainer {
-    
+    width: 332px;
+    height: 884px;
+    background: variables.$mainLighter;
+    border-radius: 16px;
+}
+
+.statsInnerContainer {
+    padding: 24px;
+}
+
+.statsHeader {
+    font-weight: variables.$mainWeight;
+    font-size: variables.$largeText;
+    line-height: 24px;
+    color: variables.$mainTextColor;
+    margin-bottom: 24px;
+}
+
+.divider {
+    border-bottom: 1px solid #303238;
+}
+
+.group {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.groupTitle {
+    font-weight: variables.$mainWeight;
+    font-size: 16px;
+    line-height: 20px;
+    color: variables.$mainTextColor;
+    margin-bottom: 16px;
+    margin-top: 24px;
+}
+
+.table {
+    display: flex;
+    gap: 16px;
+}
+
+.leftCell {
+    font-weight: variables.$mediumWeight;
+    font-size: variables.$smallText;
+    line-height: 20px;
+    color: variables.$darkTextColor;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rightCell {
+    font-weight: variables.$mediumWeight;
+    font-size: variables.$mediumText;
+    line-height: 20px;
+    color: variables.$mainTextColor;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }

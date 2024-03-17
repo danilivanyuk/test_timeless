@@ -1,3 +1,20 @@
+@use '../../variables';
+
 .searchContainer {
     
+}
+
+.searchInput {
+    width: 332px;
+    height: 52px;
+    background: variables.$mainLighter;
+    border: 0;
+    outline: none;
+    padding: 14px 16px;
+    border-radius: 16px;
+
+    font-weight: variables.$mediumWeight;
+    font-size: 16px;
+    line-height: 24px;
+    color: variables.$darkTextColor;
 }

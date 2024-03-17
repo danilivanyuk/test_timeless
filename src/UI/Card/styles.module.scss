@@ -1,10 +1,20 @@
 .usersContainer {
-    // overflow-y: hidden;
-    overflow-x: scroll;
-    height: 1000px;
+    overflow-y: auto;
+    // overflow-x: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    width: 80%;
+    max-width: 1028px;
+    // position: absolute;
+
+    scrollbar-color: rgba(122, 122, 122, 1) rgba(232, 232, 232, 0.1);
+    scrollbar-width: thin;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+
+@media screen and (min-width: 2100px) {
+    .usersContainer {
+        max-width: 1725px;
+    }
 }

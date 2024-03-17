@@ -5,9 +5,14 @@ import styles from "./styles.module.scss"
 export const HomePage = () => {
     return (
         <div className={styles['mainPage']}>
-            <Search />
-            <Card />
-            <StatsField />
+            <div className={styles['topSection']}>
+                <Search />
+                <p>Refresh Users</p>
+            </div>
+            <div className={styles['mainSection']}>
+                <Card />
+                <StatsField />
+            </div>
         </div>
     )
 }
