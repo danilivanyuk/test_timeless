@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { UserCard } from "../UserCard"
 import styles from "./styles.module.scss"
-import fetchUsers, { mockedValue } from "../../Core/Api"
 import { IUser } from "../../Core/Interfaces/IUser"
+import AppContainer from "../../Core/SingletonObject"
+import { useGlobalState } from "../../Core/StateManager"
 
 export function useScrollWithShadow() {
     const [scrollTop, setScrollTop] = useState(0);
@@ -37,23 +38,21 @@ export function useScrollWithShadow() {
     return { boxShadow: getBoxShadow(), onScrollHandler };
   }
 
+export function useStateManager() {
+    const state = AppContainer
+}
+
 export const Card = () => {
-    const [users, setUsers] = useState<IUser[]>()
+    const {state, setState} = useGlobalState()
     const { boxShadow, onScrollHandler } = useScrollWithShadow();
-
-
-    const getUsers = async() => {
-        setUsers(mockedValue.results)
-    }
-    useEffect (() => {
-        getUsers()
-
-    }, [])
+    useEffect(()=>{
+        console.log(state.users?.filter(obj => obj.dob.age > 41 && obj.dob.age < 50).length)
+    },[])
     return (
         // TODO: Тень
         <div className={styles['usersContainer']} onScroll={onScrollHandler} style={{boxShadow}}>
-            {users?.map((user) => (
-                <UserCard user={user} key={user.id.name}/>
+            {state.users?.map((user: IUser) => (
+                <UserCard user={user} key={user.login.uuid}/>
             ))}
         </div>
     )
