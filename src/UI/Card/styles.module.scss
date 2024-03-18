@@ -1,20 +1,53 @@
 .usersContainer {
     overflow-y: auto;
-    // overflow-x: hidden;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
     max-width: 1028px;
-    // position: absolute;
-
+    height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    gap: 10px;
+    width: 100%;
     scrollbar-color: rgba(122, 122, 122, 1) rgba(232, 232, 232, 0.1);
     scrollbar-width: thin;
-    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+
 }
+
+
+.shadowTop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 360px);
+    height: 32px;
+    background: linear-gradient(0deg, rgba(18, 20, 27, 0) 0%, #12141B 100%);
+    z-index: 10;
+}
+
+.usersContainerWithShadow {
+    height: calc(100vh - 140px);
+
+    &::after {
+        content: '';
+        position: sticky;
+        z-index: 10;
+        width: 99%;
+        height: 100px;
+        background: linear-gradient(180deg, rgba(18, 20, 27, 0) 0%, #12141B 100%);
+        bottom: 0px;
+        display: block;
+    
+    }
+}
+
 
 @media screen and (min-width: 2100px) {
     .usersContainer {
+        width: 1725px;
         max-width: 1725px;
     }
 }

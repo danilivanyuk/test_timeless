@@ -16,26 +16,23 @@ export function useScrollWithShadow() {
       setClientHeight(event.target.clientHeight);
     };
   
-    function getBoxShadow() {
+    function isShowShadow(): boolean {
       const isBottom = clientHeight === scrollHeight - scrollTop;
       const isTop = scrollTop === 0;
       const isBetween = scrollTop > 0 && clientHeight < scrollHeight - scrollTop;
-  
-      let boxShadow = "none";
-      const top = "inset0 8px 5px -5px white";
-      const bottom = "inset 0 10px 0px -5px white";
-  
+      
+      let shadow = false;
       if (isTop) {
-        boxShadow = bottom;
+        shadow = false;
       } else if (isBetween) {
-        boxShadow = `${top}, ${bottom}`;
+        shadow = true;
       } else if (isBottom) {
-        boxShadow = top;
+        shadow = true;
       }
-      return boxShadow;
+      return shadow;
     }
   
-    return { boxShadow: getBoxShadow(), onScrollHandler };
+    return { showShadow: isShowShadow(), onScrollHandler };
   }
 
 export function useStateManager() {
@@ -44,16 +41,18 @@ export function useStateManager() {
 
 export const Card = () => {
     const {state, setState} = useGlobalState()
-    const { boxShadow, onScrollHandler } = useScrollWithShadow();
+    const { showShadow, onScrollHandler } = useScrollWithShadow();
     useEffect(()=>{
         console.log(state.users?.filter(obj => obj.dob.age > 41 && obj.dob.age < 50).length)
     },[])
     return (
         // TODO: Тень
-        <div className={styles['usersContainer']} onScroll={onScrollHandler} style={{boxShadow}}>
-            {state.users?.map((user: IUser) => (
-                <UserCard user={user} key={user.login.uuid}/>
-            ))}
+        <div className={`${styles['usersContainer']} ${showShadow && styles['usersContainerWithShadow']}`} onScroll={onScrollHandler}>
+          {showShadow && <div className={styles['shadowTop']}></div>}
+              {state.users?.map((user: IUser) => (
+                  <UserCard user={user} key={user.login.uuid}/>
+              ))}
+
         </div>
     )
 }
