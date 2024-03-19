@@ -23,7 +23,7 @@ export const UserCard = (props: IUserCardProps) => {
                         <p>Address</p>
                     </div>
                     <div className={styles['userAdditionalInfo']}>
-                        <p>{props.user.cell}</p>
+                        <p>{props.user.phone}</p>
                         {/* TODO: сделать дату */}
                         <p>{new Date(props.user.dob.date).toDateString()}</p>
                         <p>{props.user.location.city}, {props.user.location.state}, {props.user.location.country}</p>

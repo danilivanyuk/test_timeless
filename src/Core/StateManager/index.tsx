@@ -1,27 +1,44 @@
-import React, { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+import React, { Dispatch, ReducerAction, SetStateAction, createContext, useContext, useState } from "react";
+import { IGlobalState, ISetGroupsProps, IStateProvider } from "../Interfaces/IState";
 import { IUser } from "../Interfaces/IUser";
-import { IGlobalState } from "../Interfaces/IState";
+import { Func } from "../Interfaces/ICore";
+
+const initialState: IGlobalState = {
+  users: [],
+} 
 
 export const StateContext = createContext({
   state: {} as Partial<IGlobalState>,
-  setState: {} as Dispatch<SetStateAction<Partial<IGlobalState>>>,
+  setState: {} as Dispatch<SetStateAction<IGlobalState>>,
+  setGroups: {} as Func<ISetGroupsProps, void>,
+  setFilteredUsers: {} as Func<IUser[] | undefined, void>
 });
 
-interface IStateProvider {
-  children: React.ReactNode | React.ReactNode[],
-  value?: Partial<IGlobalState>
-}
+
 
 const StateProvider = ({
   children,
-  value = {} as IGlobalState,
 }: IStateProvider) => {
-  const [state, setState] = useState(value);
-  const setAgeGroup = () => {
-    state.users?.filter(obj => obj.dob.age > 21 && obj.dob.age < 30)
+  const [state, setState] = useState<IGlobalState>(initialState);
+
+  const setGroups = (props: ISetGroupsProps): void => {
+    setState({
+      ...state,
+      groups: {
+        ageGroup: props.ageGroup,
+        genderGroup: props.genderGroup
+      }
+    })
+  }
+
+  const setFilteredUsers = (filteredUsers: IUser[] | undefined): void => {
+    setState({
+      ...state,
+      filteredUsers
+    })
   }
   return (
-    <StateContext.Provider value={{ state, setState }}>
+    <StateContext.Provider value={{ state, setState, setGroups, setFilteredUsers }}>
       {children}
     </StateContext.Provider>
   );
@@ -37,4 +54,4 @@ const useGlobalState = () => {
   return context;
 };
 
-export {StateProvider, useGlobalState};
+export { StateProvider, useGlobalState };

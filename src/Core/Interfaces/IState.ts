@@ -21,3 +21,13 @@ export interface IGenderGroup {
     'male': number,
     'female': number,
 }
+
+export interface IStateProvider {
+    children: React.ReactNode | React.ReactNode[],
+    value?: Partial<IGlobalState>
+  }
+  
+export interface ISetGroupsProps {
+    ageGroup: IAgeGroup,
+    genderGroup: IGenderGroup
+  }

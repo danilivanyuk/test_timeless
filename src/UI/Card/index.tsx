@@ -24,35 +24,31 @@ export function useScrollWithShadow() {
       let shadow = false;
       if (isTop) {
         shadow = false;
-      } else if (isBetween) {
-        shadow = true;
-      } else if (isBottom) {
+      } else if (isBetween || isBottom) {
         shadow = true;
       }
       return shadow;
     }
   
     return { showShadow: isShowShadow(), onScrollHandler };
-  }
-
-export function useStateManager() {
-    const state = AppContainer
 }
 
 export const Card = () => {
-    const {state, setState} = useGlobalState()
+    const { state } = useGlobalState()
     const { showShadow, onScrollHandler } = useScrollWithShadow();
-    useEffect(()=>{
-        console.log(state.users?.filter(obj => obj.dob.age > 41 && obj.dob.age < 50).length)
-    },[])
     return (
-        // TODO: Тень
         <div className={`${styles['usersContainer']} ${showShadow && styles['usersContainerWithShadow']}`} onScroll={onScrollHandler}>
           {showShadow && <div className={styles['shadowTop']}></div>}
-              {state.users?.map((user: IUser) => (
-                  <UserCard user={user} key={user.login.uuid}/>
-              ))}
-
+            {state.filteredUsers ? 
+              state.filteredUsers?.map((user: IUser) => (
+                <UserCard user={user} key={user.login.uuid}/>
+              ))
+            :
+              state.users?.map((user: IUser) => (
+                <UserCard user={user} key={user.login.uuid}/>
+              ))
+            }
+          {showShadow && <div className={styles['shadowBottom']}></div>}
         </div>
     )
 }

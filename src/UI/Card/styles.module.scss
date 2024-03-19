@@ -1,20 +1,15 @@
 .usersContainer {
     overflow-y: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 332px);
+    grid-template-rows: repeat(auto-fit, 196px);
+    gap: 10px 10px;
     max-width: 1028px;
     height: calc(100vh - 110px);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     overflow-y: scroll;
-    gap: 10px;
     width: 100%;
     scrollbar-color: rgba(122, 122, 122, 1) rgba(232, 232, 232, 0.1);
     scrollbar-width: thin;
-
 }
 
 
@@ -28,21 +23,17 @@
     z-index: 10;
 }
 
-.usersContainerWithShadow {
-    height: calc(100vh - 140px);
-
-    &::after {
-        content: '';
-        position: sticky;
-        z-index: 10;
-        width: 99%;
-        height: 100px;
-        background: linear-gradient(180deg, rgba(18, 20, 27, 0) 0%, #12141B 100%);
-        bottom: 0px;
-        display: block;
-    
-    }
+.shadowBottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 360px);
+    height: 32px;
+    background: linear-gradient(180deg, rgba(18, 20, 27, 0) 0%, #12141B 100%);
+    z-index: 10;
 }
+
+
 
 
 @media screen and (min-width: 2100px) {

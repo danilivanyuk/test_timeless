@@ -3,7 +3,7 @@ import { useGlobalState } from "../../Core/StateManager"
 import styles from "./styles.module.scss"
 import { IAgeGroup, IGenderGroup } from "../../Core/Interfaces/IState"
 export const StatsField = () => {
-    const { state, setState } = useGlobalState()
+    const { state, setGroups } = useGlobalState()
     const getGenderGroup = (): IGenderGroup => {
         const result: IGenderGroup = {
             male: state.users?.filter(user => user.gender.startsWith('m')).length || 0,
@@ -21,12 +21,11 @@ export const StatsField = () => {
         }
         return result
     }
-    const setGroups = () => {
-        // TODO: replace with ...
-        setState({users: state.users, groups: {ageGroup: getAgeGroup(), genderGroup: getGenderGroup()}})
+    const setGroupsState = () => {
+        setGroups({ageGroup: getAgeGroup(), genderGroup: getGenderGroup()})
     }
     useEffect(() => {
-        setGroups()
+        setGroupsState()
     }, [state.users])
     return (
         <div className={styles['statsContainer']}>
