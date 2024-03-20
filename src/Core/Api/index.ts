@@ -1,7 +1,7 @@
 import { IUser } from "../Interfaces/IUser";
 
 // TODO: Добавить что возвращается
-export default async function fetchUsers(amountOfUsers: number) {
+export default async function fetchUsers(amountOfUsers: number): Promise<IUser[]> {
     // const response = await fetch(`https://randomuser.me/api/?results=${amountOfUsers}`)
     // .then(response => response.json())
     // .then(json => (json))

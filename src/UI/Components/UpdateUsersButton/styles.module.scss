@@ -1,0 +1,10 @@
+@use '../../../variables';
+.refreshUsers {
+    p {
+        font-weight: variables.$mainWeight;
+        font-size: variables.$mediumText;
+        line-height: 20px;
+        color: variables.$accentColor;
+        cursor: pointer;
+    }
+}

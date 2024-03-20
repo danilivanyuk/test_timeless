@@ -1,4 +1,4 @@
-import React, { Dispatch, ReducerAction, SetStateAction, createContext, useContext, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 import { IGlobalState, ISetGroupsProps, IStateProvider } from "../Interfaces/IState";
 import { IUser } from "../Interfaces/IUser";
 import { Func } from "../Interfaces/ICore";
@@ -8,10 +8,10 @@ const initialState: IGlobalState = {
 } 
 
 export const StateContext = createContext({
-  state: {} as Partial<IGlobalState>,
+  state: initialState as IGlobalState,
   setState: {} as Dispatch<SetStateAction<IGlobalState>>,
   setGroups: {} as Func<ISetGroupsProps, void>,
-  setFilteredUsers: {} as Func<IUser[] | undefined, void>
+  setFilteredUsers: {} as Func<IUser[] | undefined, void>,
 });
 
 
@@ -37,6 +37,7 @@ const StateProvider = ({
       filteredUsers
     })
   }
+
   return (
     <StateContext.Provider value={{ state, setState, setGroups, setFilteredUsers }}>
       {children}

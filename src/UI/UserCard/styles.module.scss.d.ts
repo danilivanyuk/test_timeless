@@ -9,5 +9,6 @@ declare const styles: {
 	readonly cardBottom: string
 	readonly userAdditionalInfoTitle: string
 	readonly userAdditionalInfo: string
+	readonly trashBin: string
 }
 export = styles

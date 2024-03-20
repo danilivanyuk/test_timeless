@@ -6,6 +6,7 @@
     width: 332px;
     border-radius: 16px;
     background: variables.$mainLighter;
+    position: relative;
 }
 .userCardInner {
     padding: variables.$defaultPadding;
@@ -71,4 +72,21 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.trashBin {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+
+    display: block;
+    cursor: pointer;
+    svg {
+        padding: 10px;
+        border-width: 0px 0px 1px 1px;
+        border-style: solid;
+        border-color: rgba(255, 44, 71, 0.2);
+        border-bottom-left-radius: 10px;
+    }
 }

@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { UserCard } from "../UserCard"
 import styles from "./styles.module.scss"
 import { IUser } from "../../Core/Interfaces/IUser"
-import AppContainer from "../../Core/SingletonObject"
 import { useGlobalState } from "../../Core/StateManager"
 
 export function useScrollWithShadow() {
