@@ -5,9 +5,19 @@ import { IAgeGroup, IGenderGroup } from "../../Core/Interfaces/IState"
 export const StatsField = () => {
     const { state, setGroups } = useGlobalState()
     const getGenderGroup = (): IGenderGroup => {
+        const male = []
+        const female = []
+        for (let i = 0; i < state.users.length; i++) {
+            if (state.users[i].gender === 'male') {
+                male.push(state.users[i])
+            }
+            if (state.users[i].gender === 'female') {
+                female.push(state.users[i])
+            }
+        }
         const result: IGenderGroup = {
-            male: state.users?.filter(user => user.gender.startsWith('m')).length || 0,
-            female: state.users?.filter(user => user.gender.startsWith('f')).length|| 0
+            male: male.length,
+            female: female.length
         }
         return result
     }
@@ -17,23 +27,23 @@ export const StatsField = () => {
         const from31To40 = []
         const from41To50 = []
         const from51 = []
-        state.users?.filter(user => {
-            if (user.dob.age >= 11 && user.dob.age <= 20) {
-                from11To20.push(user)
+        for (let i = 0; i < state.users.length; i++) {
+            if (state.users[i].dob.age >= 11 && state.users[i].dob.age <= 20) {
+                from11To20.push(state.users[i])
             }
-            if (user.dob.age >= 21 && user.dob.age <= 30) {
-                from21To30.push(user)
+            if (state.users[i].dob.age >= 21 && state.users[i].dob.age <= 30) {
+                from21To30.push(state.users[i])
             }
-            if (user.dob.age >= 31 && user.dob.age <= 40) {
-                from31To40.push(user)
+            if (state.users[i].dob.age >= 31 && state.users[i].dob.age <= 40) {
+                from31To40.push(state.users[i])
             }
-            if (user.dob.age >= 41 && user.dob.age <= 50) {
-                from41To50.push(user)
+            if (state.users[i].dob.age >= 41 && state.users[i].dob.age <= 50) {
+                from41To50.push(state.users[i])
             }
-            if (user.dob.age >= 51) {
-                from51.push(user)
+            if (state.users[i].dob.age >= 51) {
+                from51.push(state.users[i])
             }
-        })
+        }
         const result: IAgeGroup = {
             '11-to-20': from11To20.length,
             '21-to-30': from21To30.length,
