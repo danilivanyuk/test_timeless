@@ -7,6 +7,7 @@
     border-radius: 16px;
     background: variables.$mainLighter;
     position: relative;
+    white-space: nowrap
 }
 .userCardInner {
     padding: variables.$defaultPadding;
@@ -19,10 +20,7 @@
     height: 56px;
     width: 255px;
     gap: 16px;
-    overflow: hidden;
-    // TODO: Сделать ...
-    text-overflow: ellipsis;
-    white-space: nowrap; 
+    position: relative;
 }
 .userImage {
     border-radius: variables.$defaultRadius;
@@ -34,20 +32,25 @@
     font-weight: variables.$mainWeight;
     font-size: variables.$largeText;
     line-height: 24px;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
 }
 
 .userEmail {
     font-weight: variables.$mediumWeight;
     font-size: variables.$mediumText;
     line-height: 20px;
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
 }
 
 .cardBottom {
     width: 292px;
     overflow: hidden;
-    // TODO: Сделать ...
-    text-overflow: ellipsis;
-    white-space: nowrap; 
     display: grid;
     grid-template-columns: 57px 219px;
     gap: 16px;
@@ -72,6 +75,12 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; 
+    }
 }
 
 .trashBin {

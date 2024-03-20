@@ -3,19 +3,23 @@ import { Card } from "../Card"
 import { Search } from "../Search"
 import { StatsField } from "../StatsField"
 import styles from "./styles.module.scss"
-import fetchUsers, { mockedValue } from "../../Core/Api"
+import fetchUsers from "../../Core/Api"
 import { useGlobalState } from "../../Core/StateManager"
 import { UpdateUsersButton } from "../Components/UpdateUsersButton"
+
 export const HomePage = () => {
     const {setState} = useGlobalState()
     const getUsers = async () => {
-        const users = await fetchUsers(500)
-        setState({ users })
+        try {
+            const users = await fetchUsers(500)
+            setState({ users })
+        }
+        catch {
+            console.log('modal with error')
+        }
     }
     useEffect(() => {
-        // TODO: раскомментить
-        // getUsers()
-        setState({users: mockedValue.results})
+        getUsers()
     }, [])
     return (
         <div className={styles['mainPage']}>

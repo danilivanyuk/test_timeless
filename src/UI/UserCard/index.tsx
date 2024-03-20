@@ -9,7 +9,7 @@ export interface IUserCardProps {
 }
 
 export const UserCard = (props: IUserCardProps) => {
-    const { state, setState } = useGlobalState()
+    const { state, removeUser } = useGlobalState()
     const [showTrashbin, setShowTrashbin] = useState(false)
     const arrayWithShiftDelete = (index: number) => {
         let stop = state.users.length - 1;
@@ -22,10 +22,16 @@ export const UserCard = (props: IUserCardProps) => {
     const deleteCard = () => {
         var removeIndex = state.users.map(function(item) { return item.login.uuid === props.user.login.uuid }).indexOf(true)
         const stateWithDeletedUser = arrayWithShiftDelete(removeIndex)
-        setState({
-            users: stateWithDeletedUser
+        removeUser(stateWithDeletedUser)
+    }
+
+    const formattedDate = (dateFromApi: string) => {
+        const date = new Date(dateFromApi)
+        return date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
         })
     }
+
     return (
         <div className={styles['userCard']}>
             <div className={styles['userCardInner']} onClick={() => setShowTrashbin(!showTrashbin)}>
@@ -44,8 +50,7 @@ export const UserCard = (props: IUserCardProps) => {
                     </div>
                     <div className={styles['userAdditionalInfo']}>
                         <p>{props.user.phone}</p>
-                        {/* TODO: сделать дату */}
-                        <p>{new Date(props.user.dob.date).toDateString()}</p>
+                        <p>{formattedDate(props.user.dob.date)}</p>
                         <p>{props.user.location.city}, {props.user.location.state}, {props.user.location.country}</p>
                     </div>
                 </div>

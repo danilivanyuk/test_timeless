@@ -1,5 +1,6 @@
 .usersContainer {
     overflow-y: auto;
+    overflow-x: hidden;
     display: grid;
     grid-template-columns: repeat(auto-fit, 332px);
     grid-template-rows: repeat(auto-fit, 196px);

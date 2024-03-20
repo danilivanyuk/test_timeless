@@ -4,12 +4,18 @@ import styles from "./styles.module.scss";
 
 
 export const UpdateUsersButton = () => {
-    const { setState } = useGlobalState()
+    const { state, setState } = useGlobalState()
     const updateUsers = async () => {
-        const newUsers = await fetchUsers(500)
-        setState({
-            users: newUsers
-        })
+        try {
+            const newUsers = await fetchUsers(500)
+            setState({
+                ...state,
+                users: newUsers
+            })
+        }
+        catch {
+            console.log('modal with error')
+        }
     }
     return (
         <div className={styles['refreshUsers']}>

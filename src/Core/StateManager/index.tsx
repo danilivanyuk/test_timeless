@@ -12,6 +12,7 @@ export const StateContext = createContext({
   setState: {} as Dispatch<SetStateAction<IGlobalState>>,
   setGroups: {} as Func<ISetGroupsProps, void>,
   setFilteredUsers: {} as Func<IUser[] | undefined, void>,
+  removeUser: {} as Func<IUser[], void>,
 });
 
 
@@ -38,8 +39,14 @@ const StateProvider = ({
     })
   }
 
+  const removeUser = (users: IUser[]) => {
+    setState({
+      users
+    })
+  }
+
   return (
-    <StateContext.Provider value={{ state, setState, setGroups, setFilteredUsers }}>
+    <StateContext.Provider value={{ state, setState, setGroups, setFilteredUsers, removeUser }}>
       {children}
     </StateContext.Provider>
   );

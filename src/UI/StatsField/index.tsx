@@ -12,21 +12,54 @@ export const StatsField = () => {
         return result
     }
     const getAgeGroup = (): IAgeGroup => {
+        const from11To20 = []
+        const from21To30 = []
+        const from31To40 = []
+        const from41To50 = []
+        const from51 = []
+        state.users?.filter(user => {
+            if (user.dob.age >= 11 && user.dob.age <= 20) {
+                from11To20.push(user)
+            }
+            if (user.dob.age >= 21 && user.dob.age <= 30) {
+                from21To30.push(user)
+            }
+            if (user.dob.age >= 31 && user.dob.age <= 40) {
+                from31To40.push(user)
+            }
+            if (user.dob.age >= 41 && user.dob.age <= 50) {
+                from41To50.push(user)
+            }
+            if (user.dob.age >= 51) {
+                from51.push(user)
+            }
+        })
         const result: IAgeGroup = {
-            '11-to-20': state.users?.filter(user => user.dob.age >= 11 && user.dob.age <= 20).length || 0,
-            '21-to-30': state.users?.filter(user => user.dob.age >= 21 && user.dob.age <= 30).length || 0,
-            '31-to-40': state.users?.filter(user => user.dob.age >= 31 && user.dob.age <= 40).length || 0,
-            '41-to-50': state.users?.filter(user => user.dob.age >= 41 && user.dob.age <= 50).length || 0,
-            '51+': state.users?.filter(user => user.dob.age >= 51).length || 0,
+            '11-to-20': from11To20.length,
+            '21-to-30': from21To30.length,
+            '31-to-40': from31To40.length,
+            '41-to-50': from41To50.length,
+            '51+': from51.length,
         }
         return result
     }
     const setGroupsState = () => {
         setGroups({ageGroup: getAgeGroup(), genderGroup: getGenderGroup()})
     }
+    const showAmountOfUsers = (amount: number | undefined): string => {
+        if (amount === undefined) {
+            return ''
+        }
+        if (amount > 1 || amount === 0) {
+            return `${amount} users`
+        }
+        else {
+            return `${amount} user`
+        }
+    }
     useEffect(() => {
         setGroupsState()
-    }, [state.users])
+    }, [state.users, state.users.length])
     return (
         <div className={styles['statsContainer']}>
             <div className={styles['statsInnerContainer']}>
@@ -45,12 +78,11 @@ export const StatsField = () => {
                             <p>51+</p>
                         </div>
                         <div className={styles['rightCell']}>
-                            {/* TODO: user/users */}
-                            <p>{state.groups?.ageGroup["11-to-20"]} users</p>
-                            <p>{state.groups?.ageGroup["21-to-30"]} users</p>
-                            <p>{state.groups?.ageGroup["31-to-40"]} users</p>
-                            <p>{state.groups?.ageGroup["41-to-50"]} users</p>
-                            <p>{state.groups?.ageGroup["51+"]} users</p>
+                            <p>{showAmountOfUsers(state.groups?.ageGroup["11-to-20"])}</p>
+                            <p>{showAmountOfUsers(state.groups?.ageGroup["21-to-30"])}</p>
+                            <p>{showAmountOfUsers(state.groups?.ageGroup["31-to-40"])}</p>
+                            <p>{showAmountOfUsers(state.groups?.ageGroup["31-to-40"])}</p>
+                            <p>{showAmountOfUsers(state.groups?.ageGroup["51+"])}</p>
                         </div>
                     </div>
                 </div>
@@ -63,8 +95,8 @@ export const StatsField = () => {
                             <p>Female</p>
                         </div>
                         <div className={styles['rightCell']}>
-                            <p>{state.groups?.genderGroup.male}</p>
-                            <p>{state.groups?.genderGroup.female}</p>
+                            <p>{showAmountOfUsers(state.groups?.genderGroup.male)}</p>
+                            <p>{showAmountOfUsers(state.groups?.genderGroup.female)}</p>
                         </div>
                     </div>
                 </div>

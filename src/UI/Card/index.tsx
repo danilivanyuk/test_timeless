@@ -1,36 +1,10 @@
-import { useState } from "react"
+import { UIEvent, useState } from "react"
 import { UserCard } from "../UserCard"
 import styles from "./styles.module.scss"
 import { IUser } from "../../Core/Interfaces/IUser"
 import { useGlobalState } from "../../Core/StateManager"
+import { useScrollWithShadow } from "../../Core/Hooks/scrollShadowHook"
 
-export function useScrollWithShadow() {
-    const [scrollTop, setScrollTop] = useState(0);
-    const [scrollHeight, setScrollHeight] = useState(0);
-    const [clientHeight, setClientHeight] = useState(0);
-  
-    const onScrollHandler = (event: any) => {
-      setScrollTop(event.target.scrollTop);
-      setScrollHeight(event.target.scrollHeight);
-      setClientHeight(event.target.clientHeight);
-    };
-  
-    function isShowShadow(): boolean {
-      const isBottom = clientHeight === scrollHeight - scrollTop;
-      const isTop = scrollTop === 0;
-      const isBetween = scrollTop > 0 && clientHeight < scrollHeight - scrollTop;
-      
-      let shadow = false;
-      if (isTop) {
-        shadow = false;
-      } else if (isBetween || isBottom) {
-        shadow = true;
-      }
-      return shadow;
-    }
-  
-    return { showShadow: isShowShadow(), onScrollHandler };
-}
 
 export const Card = () => {
     const { state } = useGlobalState()
@@ -43,9 +17,10 @@ export const Card = () => {
                 <UserCard user={user} key={user.login.uuid}/>
               ))
             :
+            // TODO: добавить библиотеку по Virtualized list
               state.users?.map((user: IUser) => (
-                <UserCard user={user} key={user.login.uuid}/>
-              ))
+                  <UserCard user={user} key={user.login.uuid}/>
+                ))
             }
           {showShadow && <div className={styles['shadowBottom']}></div>}
         </div>
